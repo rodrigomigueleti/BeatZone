@@ -200,12 +200,15 @@ public class BTService extends Service {
             Log.w(TAG, "O Bluetooth nao foi inicializado");
             return;
         }
-
+        Log.i(TAG, "Desconectando bluetooth...");
         mBluetoothGatt.disconnect();
 
     }
 
     public void close() {
+
+        Log.i(TAG, "Fechando bluetooth...");
+
         if (mBluetoothGatt == null) {
             return;
         }

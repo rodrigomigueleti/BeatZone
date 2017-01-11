@@ -38,13 +38,14 @@ public class BTActivity extends AppCompatActivity {
 
     private String mDeviceName;
     private String mDeviceAddress;
-    private ExpandableListView mGattServicesLlist;
+    //private ExpandableListView mGattServicesLlist;
     private TextView mConnectionState;
     private boolean mConnected = false;
     private TextView mDataField;
     private BTService mBTService;
     private ArrayList<ArrayList<BluetoothGattCharacteristic>> mGattCharacteristics = new ArrayList<ArrayList<BluetoothGattCharacteristic>>();
     private BluetoothGattCharacteristic mNotifyCharacteristic;
+    private BluetoothGattCharacteristic heartCharacteristic;
 
     private final ServiceConnection mServiceConnection = new ServiceConnection() {
         @Override
@@ -77,42 +78,15 @@ public class BTActivity extends AppCompatActivity {
                 invalidateOptionsMenu();
                 clearUI();
             } else if(BTService.ACTION_GATT_SERVICES_DISCOVERED.equals(action)) {
-                displayGattServices(mBTService.getSupportedGattServices());
+                loadGattHeartMeasureCharacteristic(mBTService.getSupportedGattServices());
             } else if(BTService.ACTION_DATA_AVALIABLE.equals(action)) {
                 displayData(intent.getStringExtra(BTService.EXTRA_DATA));
             }
         }
     };
 
-    private final ExpandableListView.OnChildClickListener serviceListClickListener = new ExpandableListView.OnChildClickListener() {
-        @Override
-        public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-
-            if (mGattCharacteristics != null) {
-
-                final BluetoothGattCharacteristic characteristic = mGattCharacteristics.get(groupPosition).get(childPosition);
-                final int charaProp = characteristic.getProperties();
-
-                if ((charaProp | BluetoothGattCharacteristic.PROPERTY_READ) > 0) {
-                    if (mNotifyCharacteristic != null) {
-                        mBTService.setCharacteristicNotification(mNotifyCharacteristic, false);
-                        mNotifyCharacteristic = null;
-                    }
-                    mBTService.readCharacteristic(characteristic);
-                }
-
-                if ((charaProp | BluetoothGattCharacteristic.PROPERTY_NOTIFY) > 0) {
-                    mNotifyCharacteristic = characteristic;
-                    mBTService.setCharacteristicNotification(characteristic, true);
-                }
-                return true;
-            }
-            return false;
-        }
-    };
-
     private void clearUI() {
-        mGattServicesLlist.setAdapter((SimpleExpandableListAdapter)null);
+        //mGattServicesLlist.setAdapter((SimpleExpandableListAdapter)null);
         mDataField.setText(R.string.no_data);
     }
 
@@ -129,9 +103,9 @@ public class BTActivity extends AppCompatActivity {
         mDeviceName = intent.getStringExtra(EXTRAS_DEVICE_NAME);
         mDeviceAddress = intent.getStringExtra(EXTRAS_DEVICE_ADDRESS);
 
-        ((TextView)findViewById(R.id.device_address)).setText(mDeviceAddress);
-        mGattServicesLlist = (ExpandableListView)findViewById(R.id.gatt_services_list);
-        mGattServicesLlist.setOnChildClickListener(serviceListClickListener);
+        ((TextView)findViewById(R.id.device_name)).setText(mDeviceName);
+
+//        mGattServicesLlist.setOnChildClickListener(serviceListClickListener);
         mConnectionState = (TextView) findViewById(R.id.connection_state);
         mDataField = (TextView) findViewById(R.id.data_value);
 
@@ -208,55 +182,19 @@ public class BTActivity extends AppCompatActivity {
             mDataField.setText(data);
     }
 
-    private void displayGattServices(List<BluetoothGattService> gattServices) {
-        if (gattServices == null)
-            return;
-
-        String uuid = null;
-        String unknownServiceString = getResources().getString(R.string.unknown_service);
-        String unknownCharaString = getResources().getString(R.string.unknown_characteristic);
-
-        ArrayList<HashMap<String, String>> gattServiceData = new ArrayList<HashMap<String, String>>();
-        ArrayList<ArrayList<HashMap<String, String>>> gattCharacteristicData = new ArrayList<ArrayList<HashMap<String,String>>>();
-
-        mGattCharacteristics = new ArrayList<ArrayList<BluetoothGattCharacteristic>>();
-
+    private void loadGattHeartMeasureCharacteristic(List<BluetoothGattService> gattServices) {
         for (BluetoothGattService gattService : gattServices) {
-            HashMap<String, String> currentServiceData = new HashMap<String, String>();
-            uuid = gattService.getUuid().toString();
-            currentServiceData.put(LIST_NAME,  HeartBeatGattAttributes.lookup(uuid, unknownServiceString));
-            currentServiceData.put(LIST_UUID, uuid);
-            gattServiceData.add(currentServiceData);
-
-            ArrayList<HashMap<String, String>> gattCharacteristicGroupData = new ArrayList<HashMap<String, String>>();
-            List<BluetoothGattCharacteristic> gattCharacteristics = gattService.getCharacteristics();
-            ArrayList<BluetoothGattCharacteristic> charas = new ArrayList<BluetoothGattCharacteristic>();
-
-            for (BluetoothGattCharacteristic gattCharacteristic : gattCharacteristics) {
-                charas.add(gattCharacteristic);
-                HashMap<String, String> currentCharaData = new HashMap<String, String>();
-                uuid = gattCharacteristic.getUuid().toString();
-                currentCharaData.put(LIST_NAME, HeartBeatGattAttributes.lookup(uuid, unknownCharaString));
-                currentCharaData.put(LIST_UUID, uuid);
-                gattCharacteristicGroupData.add(currentCharaData);
+            if (HeartBeatGattAttributes.HEART_HATE_SERVICE.equals(gattService.getUuid().toString())) {
+                List<BluetoothGattCharacteristic> gattCharacteristics = gattService.getCharacteristics();
+                for (BluetoothGattCharacteristic gattCharacteristic : gattCharacteristics) {
+                    if (HeartBeatGattAttributes.HEART_RATE_MEASUREMENT.equals(gattCharacteristic.getUuid().toString()))
+                        this.heartCharacteristic = gattCharacteristic;
+                        if (this.heartCharacteristic != null)
+                            mBTService.readCharacteristic(this.heartCharacteristic);
+                            mBTService.setCharacteristicNotification(this.heartCharacteristic, true);
+                }
             }
-
-            mGattCharacteristics.add(charas);
-            gattCharacteristicData.add(gattCharacteristicGroupData);
         }
-
-        SimpleExpandableListAdapter gattServiceAdapter = new SimpleExpandableListAdapter(
-                this,
-                gattServiceData,
-                android.R.layout.simple_expandable_list_item_2,
-                new String[] {LIST_NAME, LIST_UUID},
-                new int[] {android.R.id.text1, android.R.id.text2},
-                gattCharacteristicData,
-                android.R.layout.simple_expandable_list_item_2,
-                new String[] {LIST_NAME, LIST_UUID},
-                new int[] {android.R.id.text1, android.R.id.text2}
-        );
-        mGattServicesLlist.setAdapter(gattServiceAdapter);
     }
 
     private static IntentFilter makeGattUpdateIntentFilter() {
@@ -266,6 +204,11 @@ public class BTActivity extends AppCompatActivity {
         intentFilter.addAction(BTService.ACTION_GATT_SERVICES_DISCOVERED);
         intentFilter.addAction(BTService.ACTION_DATA_AVALIABLE);
         return intentFilter;
+    }
+
+    public void desconectarBLE(View target) {
+        mBTService.disconnect();
+        mBTService.close();
     }
 
 }

@@ -18,7 +18,7 @@
             android:layout_width="5dp"
             android:layout_height="wrap_content" />
         <TextView
-            android:id="@+id/device_address"
+            android:id="@+id/device_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="18sp"/>
@@ -63,8 +63,12 @@
             android:text="@string/no_data"
             android:textSize="18sp"/>
     </LinearLayout>
-    <ExpandableListView
-        android:id="@+id/gatt_services_list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"></ExpandableListView>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Desconectar"
+        android:id="@+id/buttond"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:onClick="desconectarBLE" />
 </LinearLayout>
