@@ -20,7 +20,7 @@ import android.widget.ExpandableListView;
 import android.widget.SimpleExpandableListAdapter;
 import android.widget.TextView;
 
-import com.neurengine.beatzone.R;
+import com.neuroengine.beatzone.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;

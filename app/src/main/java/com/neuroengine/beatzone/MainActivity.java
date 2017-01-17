@@ -16,7 +16,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
-import com.neurengine.beatzone.R;
+import com.neuroengine.beatzone.R;
 
 public class MainActivity extends AppCompatActivity {
 
