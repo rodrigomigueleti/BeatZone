@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "913047161230",
+    "project_id": "firebase-beatzone"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:913047161230:android:75b08aff5935d506",
+        "android_client_info": {
+          "package_name": "com.neuroengine.beatzone"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "913047161230-8clpmc4ccmph67s674o2eri2n3pfsiu6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.neuroengine.beatzone",
+            "certificate_hash": "278D9FA477FB100964E7603CA0C3AE6790E0D530"
+          }
+        },
+        {
+          "client_id": "913047161230-du5pasb9h3hsaulfjtllmgmb33gfgi9q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDh6-PjQhKLjjFPGxdAnZwMgfRysVepPm0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
