@@ -4,7 +4,7 @@
 
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
-
+    <uses-permission android:name="android.permission.INTERNET"/>
     <uses-feature
         android:name="android.hardware.bluetooth_le"
         android:required="true" />
@@ -25,7 +25,14 @@
             android:name="com.neuroengine.beatzone.BTActivity"
             android:label="@string/title_activity_bt"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-
+        <activity
+            android:name="com.neuroengine.beatzone.DialogLogin"
+            android:label="@string/sign_in_activiy"
+            />
+        <activity
+            android:name="com.neuroengine.beatzone.LoginGoogle"
+            android:label="@string/sign_in_google_activiy"
+            />
         <service
             android:name="com.neuroengine.beatzone.BTService"
             android:enabled="true"

@@ -1,5 +1,6 @@
 package com.neuroengine.beatzone;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -27,7 +28,8 @@ public class StartActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_login:
-                new DialogLogin().show(getFragmentManager(), "STARTACTIVITY_LOGIN");
+                Intent intent = new Intent(getApplicationContext(), DialogLogin.class);
+                startActivity(intent);
                 return true;
             case R.id.action_main_settings:
                 Log.i("MAIN_MENU", "Settings");

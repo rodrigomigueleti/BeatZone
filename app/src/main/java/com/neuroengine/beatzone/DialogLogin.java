@@ -4,33 +4,44 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.View;
 
 /**
  * Created by usuariodebian on 17/01/17.
  */
 
-public class DialogLogin extends DialogFragment {
+public class DialogLogin extends AppCompatActivity {
+
+    static final int LOGIN_RESULT = 333;
+    private static final String TAG = "DialogLogin";
+
     @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
-        super.onCreateDialog(savedInstanceState);
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.dialog_login);
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+    }
 
-        LayoutInflater inflater = getActivity().getLayoutInflater();
+    public void startSignInGoogle(View target) {
+        Intent intent = new Intent(getApplicationContext(), LoginGoogle.class);
+        //startActivity(intent);
+        startActivityForResult(intent, LOGIN_RESULT);
+    }
 
-        builder.setView(inflater.inflate(R.layout.dialog_login, null))
-                .setNegativeButton(R.string.button_cancel, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        DialogLogin.this.getDialog().cancel();
-                    }
-                }
-                );
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
-
-
-
-        return builder.create();
+        if(requestCode == LOGIN_RESULT) {
+            if(resultCode == RESULT_OK) {
+                LoggedUser lu = (LoggedUser) data.getSerializableExtra(LoggedUser.LoggedUserId);
+                Log.v(TAG, "");
+            }
+        }
     }
 }

@@ -14,5 +14,6 @@
         android:layout_height="wrap_content"
         android:src="@drawable/common_google_signin_btn_icon_light_normal"
         android:layout_gravity="center"
+        android:onClick="startSignInGoogle"
         />
 </LinearLayout>
