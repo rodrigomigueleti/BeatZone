@@ -28,7 +28,7 @@ public class StartActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_login:
-                Intent intent = new Intent(getApplicationContext(), DialogLogin.class);
+                Intent intent = new Intent(getApplicationContext(), LoginGoogle.class);
                 startActivity(intent);
                 return true;
             case R.id.action_main_settings:

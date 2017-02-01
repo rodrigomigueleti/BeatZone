@@ -134,6 +134,7 @@ public class LoginGoogle extends AppCompatActivity implements GoogleApiClient.On
     private void signIn() {
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         startActivityForResult(signInIntent, RC_SIGN_IN);
+        updateUI(true);
     }
 
     private void signOut() {
@@ -146,6 +147,7 @@ public class LoginGoogle extends AppCompatActivity implements GoogleApiClient.On
                 }
 
         );
+        updateUI(false);
     }
 
     private void revokeAccess() {
@@ -157,6 +159,7 @@ public class LoginGoogle extends AppCompatActivity implements GoogleApiClient.On
                     }
                 }
         );
+        updateUI(false);
     }
 
     private void updateUI(boolean signedIn) {
@@ -190,8 +193,7 @@ public class LoginGoogle extends AppCompatActivity implements GoogleApiClient.On
     }
 
     public void voltarAtividade() {
-        Intent intent = new Intent(getApplicationContext(), DialogLogin.class);
-        startActivity(intent);
+        onBackPressed();
     }
 
     @Override
