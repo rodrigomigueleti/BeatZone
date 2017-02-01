@@ -16,6 +16,16 @@ import java.net.URL;
  */
 
 public class LoggedUser implements Serializable {
+
+    private static LoggedUser instance = null;
+
+    public static LoggedUser getInstance() {
+        if (instance == null) {
+            instance = new LoggedUser();
+        }
+        return instance;
+    }
+
     private String id;
 //    private Drawable image = null;
     private Uri imagemUri;

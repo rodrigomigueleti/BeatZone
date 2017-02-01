@@ -29,19 +29,19 @@ public class DialogLogin extends AppCompatActivity {
 
     public void startSignInGoogle(View target) {
         Intent intent = new Intent(getApplicationContext(), LoginGoogle.class);
-        //startActivity(intent);
-        startActivityForResult(intent, LOGIN_RESULT);
+        startActivity(intent);
+        //startActivityForResult(intent, LOGIN_RESULT);
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if(requestCode == LOGIN_RESULT) {
-            if(resultCode == RESULT_OK) {
-                LoggedUser lu = (LoggedUser) data.getSerializableExtra(LoggedUser.LoggedUserId);
-                Log.v(TAG, "");
-            }
-        }
-    }
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//
+//        if(requestCode == LOGIN_RESULT) {
+//            if(resultCode == RESULT_OK) {
+//                LoggedUser lu = (LoggedUser) data.getSerializableExtra(LoggedUser.LoggedUserId);
+//                Log.v(TAG, "");
+//            }
+//        }
+//    }
 }

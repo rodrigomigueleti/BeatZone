@@ -74,7 +74,7 @@
 
         <com.google.android.gms.common.SignInButton
             android:id="@+id/sign_in_button"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:visibility="visible"
@@ -107,7 +107,13 @@
                 android:text="@string/disconnect"
                 android:theme="@style/ThemeOverlay.MyDarkButton" />
         </LinearLayout>
-
     </RelativeLayout>
+    <Button
+        android:id="@+id/botao_voltar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="@string/back_button"
+        android:theme="@style/ThemeOverlay.MyDarkButton"/>
 
 </LinearLayout>

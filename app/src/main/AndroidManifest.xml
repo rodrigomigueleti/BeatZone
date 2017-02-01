@@ -4,7 +4,8 @@
 
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <uses-feature
         android:name="android.hardware.bluetooth_le"
         android:required="true" />
@@ -14,29 +15,28 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name="com.neuroengine.beatzone.StartActivity">
+        <activity android:name=".StartActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-       <activity
-            android:name="com.neuroengine.beatzone.BTActivity"
+        <activity
+            android:name=".BTActivity"
             android:label="@string/title_activity_bt"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name="com.neuroengine.beatzone.DialogLogin"
-            android:label="@string/sign_in_activiy"
-            />
+            android:name=".DialogLogin"
+            android:label="@string/sign_in_activiy" />
         <activity
-            android:name="com.neuroengine.beatzone.LoginGoogle"
-            android:label="@string/sign_in_google_activiy"
-            />
+            android:name=".LoginGoogle"
+            android:label="@string/sign_in_google_activiy" />
+
         <service
-            android:name="com.neuroengine.beatzone.BTService"
+            android:name=".BTService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true" />
     </application>
 
 </manifest>
