@@ -19,6 +19,7 @@ import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.OptionalPendingResult;
 import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.ResultCallbacks;
 import com.google.android.gms.common.api.Status;
 
 /**
@@ -31,6 +32,7 @@ public class LoginGoogle extends AppCompatActivity implements GoogleApiClient.On
     private static final int RC_SIGN_IN = 9001;
 
     private TextView mStatusTextView;
+    private TextView mGivenNameTextView;
     private GoogleApiClient mGoogleApiClient;
     private ProgressDialog mProgressDialog;
 
@@ -41,6 +43,7 @@ public class LoginGoogle extends AppCompatActivity implements GoogleApiClient.On
         setContentView(R.layout.layout_google_signin);
 
         mStatusTextView = (TextView) findViewById(R.id.status);
+        mGivenNameTextView = ((TextView)findViewById(R.id.given_name));
 
         findViewById(R.id.sign_in_button).setOnClickListener(this);
         findViewById(R.id.sign_out_button).setOnClickListener(this);
@@ -85,18 +88,19 @@ public class LoginGoogle extends AppCompatActivity implements GoogleApiClient.On
                 }
             });
         }
+
     }
 
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//
-//        if (requestCode == RC_SIGN_IN) {
-//            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
-//            handleSignInResult(result);
-//        }
-//
-//    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == RC_SIGN_IN) {
+            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+            handleSignInResult(result);
+        }
+
+    }
 
     private void hideProgressDialog() {
         if (mProgressDialog != null && mProgressDialog.isShowing()) {
@@ -118,14 +122,16 @@ public class LoginGoogle extends AppCompatActivity implements GoogleApiClient.On
 
         if (result.isSuccess()) {
             GoogleSignInAccount acct = result.getSignInAccount();
-            mStatusTextView.setText(getString(R.string.signed_in_fmt, acct.getDisplayName()));
+            mStatusTextView.setText(getString(R.string.signed_in_fmt, "Google"));
+            mGivenNameTextView.setText(acct.getDisplayName());
             LoggedUser lu = LoggedUser.getInstance();
             lu.setId(acct.getId());
             lu.setImagemUri(acct.getPhotoUrl());
 //            this.getIntent().putExtra(LoggedUser.LoggedUserId, lu);
-//            setResult(RESULT_OK);
-//            finish();
-            updateUI(true);
+            setResult(RESULT_OK);
+            finish();
+            onBackPressed();
+            //updateUI(true);
         } else {
             updateUI(false);
         }
@@ -168,7 +174,6 @@ public class LoginGoogle extends AppCompatActivity implements GoogleApiClient.On
             findViewById(R.id.sign_out_and_disconnect).setVisibility(View.VISIBLE);
         } else {
             mStatusTextView.setText(R.string.signed_out);
-
             findViewById(R.id.sign_in_button).setVisibility(View.VISIBLE);
             findViewById(R.id.sign_out_and_disconnect).setVisibility(View.GONE);
         }
@@ -200,4 +205,6 @@ public class LoginGoogle extends AppCompatActivity implements GoogleApiClient.On
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
         Log.d(TAG, "onConnectionFailed: " + connectionResult);
     }
+
+
 }
