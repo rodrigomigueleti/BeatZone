@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="4"
+    style="@style/BeatZoneTheme"
     tools:context=".LoginGoogle">
 
     <LinearLayout
@@ -35,11 +36,17 @@
 
         <TextView
             android:id="@+id/status"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
             android:text="@string/signed_out"
-            android:textColor="@android:color/primary_text_dark"
-            android:textSize="14sp" />
+            style="@style/CodeFontTitle"/>
+
+        <TextView
+            android:id="@+id/given_name"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:text="@string/signed_out"
+            style="@style/CodeFontName"/>
 
         <TextView
             android:id="@+id/detail"
@@ -103,7 +110,6 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/disconnect"
                 android:theme="@style/ThemeOverlay.MyButton" />
         </LinearLayout>
     </RelativeLayout>

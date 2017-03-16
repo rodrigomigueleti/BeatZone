@@ -5,7 +5,6 @@
         android:id="@+id/action_login"
         android:title="@string/action_signin"
         app:showAsAction="ifRoom"
-        android:icon="@drawable/ic_action_person"
         />
     <item
         android:id="@+id/action_main_settings"

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/title_google_sigin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/google_signin_title_text"
+        android:paddingTop="20dp"
+        style="@android:style/TextAppearance.DeviceDefault.Large"/>
+    <RelativeLayout
+        android:id="@+id/google_signed_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone">
+        <TextView
+            android:id="@+id/google_signin_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="20dp"
+            android:layout_alignParentTop="true"
+            android:gravity="center"
+            style="@android:style/TextAppearance.DeviceDefault.Medium"
+            />
+        <TextView
+            android:id="@+id/google_signin_user"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:drawableLeft="@drawable/ic_action_person"
+            android:gravity="center"
+            android:layout_below="@+id/google_signin_status"
+            />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/google_signin_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible">
+
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/google_signin_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:paddingTop="10dp">
+
+        </com.google.android.gms.common.SignInButton>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/google_signout_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone">
+            <Button
+                android:id="@+id/google_signout_button"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_action_cancel"
+                android:text="@string/sign_out"
+                android:layout_width="wrap_content"
+                android:layout_alignParentStart="true">
+            </Button>
+
+            <Button
+                android:id="@+id/google_revoke_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_action_delete"
+                android:text="@string/google_signin_revoke"
+                android:layout_alignParentEnd="true"/>
+    </RelativeLayout>
+    <Button
+        android:id="@+id/google_back_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableStart="@drawable/ic_action_undo"
+        android:layout_gravity="end"
+        android:text="@string/back_button" />
+</LinearLayout>

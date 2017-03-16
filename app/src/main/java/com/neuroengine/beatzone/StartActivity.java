@@ -35,7 +35,7 @@ public class StartActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.action_login:
                 Intent intent = new Intent(getApplicationContext(), LoginGoogle.class);
-                startActivityForResult(intent, RC_CALL_LOGIN);
+                startActivity(intent);
                 return true;
             case R.id.action_main_settings:
                 Log.i("MAIN_MENU", "Settings");
@@ -48,13 +48,13 @@ public class StartActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == RC_CALL_LOGIN) {
-            Log.i(TAG, "Resultado");
-        }
-    }
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if (requestCode == RC_CALL_LOGIN) {
+//            Log.i(TAG, "Resultado");
+//        }
+//    }
 
     @Override
     protected void onStart() {

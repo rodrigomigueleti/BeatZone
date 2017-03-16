@@ -40,15 +40,14 @@ public class LoginGoogle extends AppCompatActivity implements GoogleApiClient.On
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.layout_google_signin);
+        setContentView(R.layout.activity_google_login);
 
-        mStatusTextView = (TextView) findViewById(R.id.status);
-        mGivenNameTextView = ((TextView)findViewById(R.id.given_name));
-
-        findViewById(R.id.sign_in_button).setOnClickListener(this);
-        findViewById(R.id.sign_out_button).setOnClickListener(this);
-        findViewById(R.id.disconnect_button).setOnClickListener(this);
-        findViewById(R.id.botao_voltar).setOnClickListener(this);
+        mStatusTextView = (TextView) findViewById(R.id.google_signin_status);
+        mGivenNameTextView = ((TextView)findViewById(R.id.google_signin_user));
+        findViewById(R.id.google_signin_button).setOnClickListener(this);
+        findViewById(R.id.google_signout_button).setOnClickListener(this);
+        findViewById(R.id.google_revoke_button).setOnClickListener(this);
+        findViewById(R.id.google_back_button).setOnClickListener(this);
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
@@ -60,8 +59,8 @@ public class LoginGoogle extends AppCompatActivity implements GoogleApiClient.On
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
 
-        SignInButton signInButton = (SignInButton)findViewById(R.id.sign_in_button);
-        signInButton.setSize(SignInButton.SIZE_STANDARD);
+        SignInButton signInButton = (SignInButton)findViewById(R.id.google_signin_button);
+        //signInButton.setSize(SignInButton.SIZE_STANDARD);
 
 
     }
@@ -122,16 +121,16 @@ public class LoginGoogle extends AppCompatActivity implements GoogleApiClient.On
 
         if (result.isSuccess()) {
             GoogleSignInAccount acct = result.getSignInAccount();
-            mStatusTextView.setText(getString(R.string.signed_in_fmt, "Google"));
+            mStatusTextView.setText(getString(R.string.signed_in_fmt));
             mGivenNameTextView.setText(acct.getDisplayName());
             LoggedUser lu = LoggedUser.getInstance();
             lu.setId(acct.getId());
             lu.setImagemUri(acct.getPhotoUrl());
 //            this.getIntent().putExtra(LoggedUser.LoggedUserId, lu);
-            setResult(RESULT_OK);
-            finish();
-            onBackPressed();
-            //updateUI(true);
+//            setResult(RESULT_OK);
+//            finish();
+//            onBackPressed();
+            updateUI(true);
         } else {
             updateUI(false);
         }
@@ -170,28 +169,31 @@ public class LoginGoogle extends AppCompatActivity implements GoogleApiClient.On
 
     private void updateUI(boolean signedIn) {
         if (signedIn) {
-            findViewById(R.id.sign_in_button).setVisibility(View.GONE);
-            findViewById(R.id.sign_out_and_disconnect).setVisibility(View.VISIBLE);
+            findViewById(R.id.google_signin_layout).setVisibility(View.GONE);
+            findViewById(R.id.google_signed_layout).setVisibility(View.VISIBLE);
+            findViewById(R.id.google_signout_layout).setVisibility(View.VISIBLE);
         } else {
-            mStatusTextView.setText(R.string.signed_out);
-            findViewById(R.id.sign_in_button).setVisibility(View.VISIBLE);
-            findViewById(R.id.sign_out_and_disconnect).setVisibility(View.GONE);
+            mStatusTextView.setText("");
+            mGivenNameTextView.setText("");
+            findViewById(R.id.google_signin_layout).setVisibility(View.VISIBLE);
+            findViewById(R.id.google_signed_layout).setVisibility(View.GONE);
+            findViewById(R.id.google_signout_layout).setVisibility(View.GONE);
         }
     }
 
     @Override
     public void onClick(View v) {
         switch(v.getId()) {
-            case R.id.sign_in_button:
+            case R.id.google_signin_button:
                 signIn();
                 break;
-            case R.id.sign_out_button:
+            case R.id.google_signout_button:
                 signOut();
                 break;
-            case R.id.disconnect_button:
+            case R.id.google_revoke_button:
                 revokeAccess();
                 break;
-            case R.id.botao_voltar:
+            case R.id.google_back_button:
                 voltarAtividade();
                 break;
         }
