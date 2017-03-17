@@ -36,4 +36,17 @@
 
     <string name="signed_in_fmt">Signed user:</string>
     <string name="loading">Loading…</string>
+
+    <!-- UserParamsActivity -->
+    <string name="userparams_activity">UserParamsActivity</string>
+    <string name="userparams_title_profile">User Profile</string>
+    <string name="userparams_user_name">Name:</string>
+    <string name="userparams_user_email">Email:</string>
+    <string name="userparams_title_char">User Characteristics</string>
+    <string name="userparams_user_age">Age:</string>
+    <string name="userparams_user_height">Height (cm):</string>
+    <string name="userparams_user_weight">Weight (kg):</string>
+    <string name="userparams_back">Back</string>
+    <string name="userparams_sync">Sync</string>
+    <string name="userparams_save_device">Save</string>
 </resources>

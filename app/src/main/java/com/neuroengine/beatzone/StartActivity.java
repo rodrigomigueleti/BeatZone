@@ -34,8 +34,13 @@ public class StartActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_login:
-                Intent intent = new Intent(getApplicationContext(), LoginGoogle.class);
-                startActivity(intent);
+                if (LoggedUser.getInstance().getId().isEmpty()) {
+                    Intent intent = new Intent(getApplicationContext(), LoginGoogle.class);
+                    startActivity(intent);
+                } else {
+                    Intent intent = new Intent(getApplicationContext(), UserParamsActivity.class);
+                    startActivity(intent);
+                }
                 return true;
             case R.id.action_main_settings:
                 Log.i("MAIN_MENU", "Settings");
@@ -74,7 +79,7 @@ public class StartActivity extends AppCompatActivity {
     private void updateUI() {
         if (mActionLoginMenuItem != null)
             if (LoggedUser.getInstance().getImagemUri() == null) {
-                String uriImage = "@drawable/ic_action_person";
+                String uriImage = "@drawable/ic_person_black_24dp";
                 Drawable icon = getResources().getDrawable(getResources().getIdentifier(uriImage, null, getPackageName()));
                 mActionLoginMenuItem.setIcon(icon);
             } else {

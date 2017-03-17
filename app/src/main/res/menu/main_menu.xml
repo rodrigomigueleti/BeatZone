@@ -5,11 +5,12 @@
         android:id="@+id/action_login"
         android:title="@string/action_signin"
         app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_person_black_24dp"
         />
     <item
         android:id="@+id/action_main_settings"
         android:title="@string/action_settings"
-        android:icon="@drawable/ic_action_settings"
+        android:icon="@drawable/ic_settings_black_24dp"
         app:showAsAction="never"
         />
 

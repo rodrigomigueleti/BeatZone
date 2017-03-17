@@ -32,6 +32,9 @@
         <activity
             android:name=".LoginGoogle"
             android:label="@string/sign_in_google_activiy" />
+        <activity
+            android:name=".UserParamsActivity"
+            android:label="@string/userparams_activity" />
 
         <service
             android:name=".BTService"

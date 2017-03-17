@@ -18,6 +18,10 @@ public final class BeatZoneUserContract {
         public static final String COLUMN_USER_NAME = "user_name";
         public static final String COLUMN_USER_EMAIL = "user_email";
         public static final String COLUMN_USER_PHOTO_URL = "user_photo_url";
+        public static final String COLUMN_USER_BIRTH_DATE = "user_birth_date";
+        public static final String COLUMN_USER_AGE = "user_age";
+        public static final String COLUMN_USER_HEIGHT = "user_height";
+        public static final String COLUMN_USER_WEIGHT = "user_weight";
     }
 
     public static class BZPractice implements BaseColumns {

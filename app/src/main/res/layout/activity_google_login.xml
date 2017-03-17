@@ -64,7 +64,7 @@
             <Button
                 android:id="@+id/google_signout_button"
                 android:layout_height="wrap_content"
-                android:drawableStart="@drawable/ic_action_cancel"
+                android:drawableStart="@drawable/ic_exit_to_app_black_24dp"
                 android:text="@string/sign_out"
                 android:layout_width="wrap_content"
                 android:layout_alignParentStart="true">
@@ -74,7 +74,7 @@
                 android:id="@+id/google_revoke_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawableStart="@drawable/ic_action_delete"
+                android:drawableStart="@drawable/ic_person_revoke_access_24px"
                 android:text="@string/google_signin_revoke"
                 android:layout_alignParentEnd="true"/>
     </RelativeLayout>
@@ -82,7 +82,7 @@
         android:id="@+id/google_back_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:drawableStart="@drawable/ic_action_undo"
+        android:drawableStart="@drawable/ic_arrow_back_black_24dp"
         android:layout_gravity="end"
         android:text="@string/back_button" />
 </LinearLayout>

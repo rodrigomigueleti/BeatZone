@@ -26,7 +26,7 @@ public class LoggedUser implements Serializable {
         return instance;
     }
 
-    private String id = "";
+    private String id = "algo";
     private Uri imagemUri;
     static final String LoggedUserId = "LoggedUser";
     public static final String TAG = "LoggedUser";
